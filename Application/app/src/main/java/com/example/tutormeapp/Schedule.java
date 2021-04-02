@@ -6,18 +6,47 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+import java.util.ArrayList;
 
-public class Schedule extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class Schedule extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-    private final String[] months = { " ", "January", "February", "March"}; //Just testing. FIX LATER
-    private final String[] days = { " ", "1", "2", "3"}; //Just testing. FIX LATER
-    private final String[] years = { " ", "2021", "2022", "2023"}; //Just testing. FIX LATER
+    private final String[] months = { "(Month)", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
+            "Sep", "Oct", "Nov", "Dec"};
+
+    private final String[] days = { "(Day)", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
+    "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+
+    private final String[] years = { "(Year)", "2021", "2022", "2023", "2024", "2025"};
+
+    private final String[] courses = {"(Course)", "CS180: Programming Fundamentals","CS230: Programming with Python",
+    "CS350: Database Management Systems", "CS480: Advanced Application Development Technology",
+    "MA131: Calculus I", "MA139: Calculus II", "MA233: Calculus III", "MA252: Regression Analysis"};
+
+    private final String[] methods = {"(Method)", "Online", "Offline"};
+
+    private final String[] locations = {"(Location)", "Not Applicable", "AL", "AK", "AS", "AZ", "AR", "CA", "CO",
+    "CT", "DE", "DC", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA",
+    "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR",
+    "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "VI", "WA", "WV", "WI", "WY"};
+
+    private TextView someText;
+    private String monthString;
+    private String dayString;
+    private String yearString;
+    private String courseString;
+    private String methodString;
+    private String locationString;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.schedule);
+
+        Button findButton = (Button) findViewById(R.id.findButton);
+        findButton.setOnClickListener(this);
 
         Spinner month = (Spinner) findViewById(R.id.month);
         month.setOnItemSelectedListener(this);
@@ -41,6 +70,9 @@ public class Schedule extends AppCompatActivity implements AdapterView.OnItemSel
         ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, months);
         ArrayAdapter<String> dayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, days);
         ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
+        ArrayAdapter<String> courseAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, courses);
+        ArrayAdapter<String> methodAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, methods);
+        ArrayAdapter<String> locationAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locations);
 
         //Specify the layout to use when the list of choices appears
         monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -51,29 +83,43 @@ public class Schedule extends AppCompatActivity implements AdapterView.OnItemSel
 
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         year.setAdapter(yearAdapter);
+
+        courseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        course.setAdapter(courseAdapter);
+
+        methodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        method.setAdapter(methodAdapter);
+
+        locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        location.setAdapter(locationAdapter);
+
+        someText = (TextView) findViewById(R.id.Placeholder);
     }
 
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
         switch (parent.getId()) {
             case R.id.month:
-                Toast.makeText(this, months[position] + " selected", Toast.LENGTH_SHORT).show();
+                monthString = months[position];
                 break;
 
             case R.id.day:
-                Toast.makeText(this, days[position] + " selected", Toast.LENGTH_SHORT).show();
+                dayString = days[position];
                 break;
 
             case R.id.year:
-                Toast.makeText(this, years[position] + " selected", Toast.LENGTH_SHORT).show();
+                yearString = years[position];
                 break;
 
             case R.id.course:
+                courseString = courses[position];
                 break;
 
             case R.id.method:
+                methodString = methods[position];
                 break;
 
             case R.id.location:
+                locationString = locations[position];
                 break;
 
         }
@@ -81,6 +127,15 @@ public class Schedule extends AppCompatActivity implements AdapterView.OnItemSel
 
     public void onNothingSelected(AdapterView<?> parent) {
         //Something
+    }
+
+    public void onClick (View v) {
+        switch (v.getId()) {
+            case R.id.findButton:
+                someText.setText("Date: " + monthString + " " + dayString + ", " + yearString +
+                        ". Course: " + courseString + ". Method & location: " + methodString +
+                        " & " + locationString + ".");
+        }
     }
 }
 

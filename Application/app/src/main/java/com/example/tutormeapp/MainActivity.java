@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.chatButton:
                 //Something
+                break;
 
             case R.id.scheduleButton:
                 Intent i1 = new Intent(this, Schedule.class);
