@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button emailButton = (Button) findViewById(R.id.emailButton);
         emailButton.setOnClickListener(this);
+
+        Button loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(this);
     }
 
     public void onClick (View v) {
@@ -48,6 +51,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.emailButton:
                 Intent i3 = new Intent(this, Email.class);
                 startActivity(i3);
+                break;
+            case R.id.loginButton:
+                Intent i4= new Intent(this, Login.class);
+                startActivity(i4);
                 break;
         }
     }
