@@ -9,30 +9,30 @@
 
     <Button
         android:id="@+id/chatButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Chat"/>
+        android:layout_width="244dp"
+        android:layout_height="103dp"
+        android:layout_gravity="center"
+        android:text="@string/chat" />
 
     <Button
         android:id="@+id/scheduleButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Schedule"/>
+        android:layout_width="244dp"
+        android:layout_height="103dp"
+        android:layout_gravity="center"
+        android:text="@string/schedule" />
 
     <Button
         android:id="@+id/meetingButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Meeting"/>
+        android:layout_width="244dp"
+        android:layout_height="103dp"
+        android:layout_gravity="center"
+        android:text="@string/meeting" />
 
     <Button
         android:id="@+id/emailButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Email"/>
+        android:layout_width="244dp"
+        android:layout_height="103dp"
+        android:layout_gravity="center"
+        android:text="@string/email" />
 
 </LinearLayout>

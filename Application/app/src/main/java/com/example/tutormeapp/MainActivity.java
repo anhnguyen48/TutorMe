@@ -31,12 +31,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.chatButton:
-                //Something
+                Intent i0 = new Intent(this, Chat.class);
+                startActivity(i0); //Open Chat Activity
                 break;
 
             case R.id.scheduleButton:
                 Intent i1 = new Intent(this, Schedule.class);
-                startActivity(i1); //Open Chat Activity
+                startActivity(i1); //Open Schedule Activity
                 break;
 
             case R.id.meetingButton:
