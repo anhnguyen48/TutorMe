@@ -1,8 +1,7 @@
-
-DROP TABLE Person;
-DROP TABLE Class;
-DROP TABLE Section;
 DROP TABLE Assignment;
+DROP TABLE Section;
+DROP TABLE Class;
+DROP TABLE Person;
 
 
 CREATE TABLE Person ( 
@@ -19,7 +18,7 @@ CREATE TABLE Person (
 CREATE TABLE Class(
 	ClassID INTEGER PRIMARY KEY,
     ClassName VARCHAR(50),
-    TutorID INTEGER,
+    TutorID INTEGER NULL,
     ClassSubject VARCHAR(50),
     ClassLevel VARCHAR(50),
     ClassDescription VARCHAR(500),
