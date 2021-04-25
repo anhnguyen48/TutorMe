@@ -6,9 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
+    public String URL = "jdbc:mysql://frodo.bentley.edu:3306/tutorme";
+    public String username = "harry";
+    public String password = "harry";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,9 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button emailButton = (Button) findViewById(R.id.emailButton);
         emailButton.setOnClickListener(this);
-
-        Button loginButton = (Button) findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(this);
     }
 
     public void onClick (View v) {
@@ -51,10 +55,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.emailButton:
                 Intent i3 = new Intent(this, Email.class);
                 startActivity(i3);
-                break;
-            case R.id.loginButton:
-                Intent i4= new Intent(this, Login.class);
-                startActivity(i4);
                 break;
         }
     }

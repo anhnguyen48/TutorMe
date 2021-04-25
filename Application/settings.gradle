@@ -1,2 +1,3 @@
+include ':mysql-connector-java-5.1.26-bin'
 include ':app'
 rootProject.name = "TutorMeApp"
