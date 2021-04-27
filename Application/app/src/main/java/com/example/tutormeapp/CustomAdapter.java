@@ -27,10 +27,11 @@ public class CustomAdapter extends ArrayAdapter {
             LayoutInflater layoutInflater = LayoutInflater.from(context);
             convertView = layoutInflater.inflate(R.layout.meeting_item, null);
 
-            String tempString = "Date: " + detail_info[0] +
-                    "\nTime: " + detail_info[1] +
-                    "\nMeeting Length: " + detail_info[2] + " hour(s)" +
-                    "\nCourse Number: " + detail_info[3];
+            String tempString = "Course Number: " + detail_info[0] +
+                    "\nDate: " + detail_info[1] +
+                    "\nTime: " + detail_info[2] +
+                    "\nMeeting Length: " + detail_info[3] + " minutes" +
+                    "\nCapacity: " + detail_info[4];
 
             TextView session = convertView.findViewById(R.id.session);
             session.setText(tempString);

@@ -1,129 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <TableLayout
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="335dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginTop="10sp">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="335dp">
 
-            <TextView
-                android:layout_width="50sp"
-                android:layout_height="fill_parent"
-                android:layout_span="1"
-                android:layout_weight="1"
-                android:padding="15sp"
-                android:text="Date" />
-
-            <Spinner
-                android:id="@+id/month"
-                android:layout_width="50dp"
-                android:layout_height="fill_parent"
-                android:layout_span="1"
-                android:layout_weight="6"
-                android:padding="15sp" />
-
-            <Spinner
-                android:id="@+id/day"
-                android:layout_width="140sp"
-                android:layout_height="fill_parent"
-                android:layout_span="1"
-                android:layout_weight="1"
-                android:padding="15sp" />
-
-            <Spinner
-                android:id="@+id/year"
-                android:layout_width="150sp"
-                android:layout_height="fill_parent"
-                android:layout_span="1"
-                android:layout_weight="1"
-                android:padding="15sp" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginTop="10sp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:padding="15sp"
-                android:text="Course" />
-
-            <Spinner
-                android:id="@+id/course"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="3"
-                android:padding="15sp" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginTop="10sp">
-
-            <TextView
+            <TableRow
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:padding="15sp"
-                android:text="Preferred Tutoring\nMethod" />
+                android:layout_marginTop="10sp">
 
-            <Spinner
-                android:id="@+id/method"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="50sp"
+                    android:layout_height="fill_parent"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:padding="15sp"
+                    android:text="Date" />
+
+                <Spinner
+                    android:id="@+id/month"
+                    android:layout_width="50dp"
+                    android:layout_height="fill_parent"
+                    android:layout_span="1"
+                    android:layout_weight="6"
+                    android:padding="15sp" />
+
+                <Spinner
+                    android:id="@+id/day"
+                    android:layout_width="140sp"
+                    android:layout_height="fill_parent"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:padding="15sp" />
+
+                <Spinner
+                    android:id="@+id/year"
+                    android:layout_width="150sp"
+                    android:layout_height="fill_parent"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:padding="15sp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="3"
-                android:padding="15sp" />
+                android:layout_marginTop="10sp">
 
-        </TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:padding="15sp"
+                    android:text="Course" />
 
-        <TableRow
+                <Spinner
+                    android:id="@+id/course"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="3"
+                    android:padding="15sp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="10sp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:padding="15sp"
+                    android:text="Preferred Tutoring\nMethod" />
+
+                <Spinner
+                    android:id="@+id/method"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="3"
+                    android:padding="15sp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="10sp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:padding="15sp"
+                    android:text="Location" />
+
+                <Spinner
+                    android:id="@+id/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="3"
+                    android:padding="15sp" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/findButton"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginTop="10sp">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Find Session!"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:padding="15sp"
-                android:text="Location" />
+        <ListView
+            android:id="@+id/list2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dividerHeight="2sp"
+            android:drawSelectorOnTop="true"/>
 
-            <Spinner
-                android:id="@+id/location"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="3"
-                android:padding="15sp" />
+    </LinearLayout>
 
-        </TableRow>
-
-    </TableLayout>
-
-    <Button
-        android:id="@+id/findButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Find Session!"/>
-
-    <TextView
-        android:id="@+id/Placeholder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="15sp" />
-
-</LinearLayout>
