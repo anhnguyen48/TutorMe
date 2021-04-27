@@ -59,7 +59,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         while (result2.next()) {
                             userID = result2.getString("PersonID");
                         }
-                        Intent i1= new Intent(this, MainActivity.class);
+                        Intent i1 = new Intent(this, MainActivity.class);
                         i1.putExtra("userID", userID); //Bring userID to MainActivity for later use
                         startActivity(i1);
                     }

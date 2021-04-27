@@ -51,6 +51,7 @@ public class Chat extends Activity implements OnClickListener, OnItemSelectedLis
                 Intent intent2 = new Intent(Intent.ACTION_SENDTO, uri2);
                 intent2.putExtra("sms_body", "Hey TutorMe Registrar, I need some help!");
                 startActivity(intent2);
+                break;
 
             case R.id.contact_counselor:
                 selection = (TextView) findViewById(R.id.selection);
@@ -68,13 +69,12 @@ public class Chat extends Activity implements OnClickListener, OnItemSelectedLis
                 aa.setDropDownViewResource(
                         android.R.layout.simple_spinner_dropdown_item);
                 spin.setAdapter(aa);  //connect ArrayAdapter to <Spinner>
+                break;
         }
-                Uri uri3 = Uri.parse(String.valueOf(selection));
+               /* Uri uri3 = Uri.parse(String.valueOf(selection));
                 Intent intent3 = new Intent(Intent.ACTION_SENDTO, uri3);
                 intent3.putExtra("sms_body", "Hey TutorMe Tutor, I need some help!");
-                startActivity(intent3);
-
-
+                startActivity(intent3); */
 
 
         }
