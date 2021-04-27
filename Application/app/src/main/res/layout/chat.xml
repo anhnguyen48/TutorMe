@@ -20,7 +20,7 @@
         android:layout_height="335dp">
         <TableRow>
     <Button
-        android:id="@+id/general_inquiries"
+        android:id="@+id/g_inquiries"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/general_inquiries" />
