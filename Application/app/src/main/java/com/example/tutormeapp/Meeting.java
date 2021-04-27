@@ -26,6 +26,10 @@ public class Meeting extends AppCompatActivity {
 
     private String userID;
 
+    private String section;
+    private String course_id;
+    private String course_name;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meeting);
@@ -49,23 +53,27 @@ public class Meeting extends AppCompatActivity {
             ResultSet result = stmt.executeQuery();
 
             while (result.next()) {
-                String section = result.getString("SectionID");
+                section = result.getString("SectionID");
 
                 //get ClassID in Section table using SectionID from Assignment table
                 String sql2 = "SELECT ClassID FROM Section WHERE SectionID = ? LIMIT 1;";
                 PreparedStatement stmt2 = con.prepareStatement(sql2);
                 stmt2.setString(1, section);
                 ResultSet result2 = stmt2.executeQuery();
-                result2.next();
-                String course_id = result2.getString("ClassID");
+
+                while (result2.next()) {
+                course_id = result2.getString("ClassID");
+                }
 
                 //get ClassName in Class table using ClassID from Section table
                 String sql3 = "SELECT ClassName FROM Class WHERE ClassID = ? LIMIT 1;";
                 PreparedStatement stmt3 = con.prepareStatement(sql3);
                 stmt3.setString(1, course_id);
                 ResultSet result3 = stmt3.executeQuery();
-                result3.next();
-                String course_name = result3.getString("ClassName");
+
+                while (result3.next()) {
+                    course_name = result3.getString("ClassName");
+                }
 
                 String sql4 = "SELECT SectionDate, SectionTime, Length, Capacity " +
                         "FROM Section WHERE SectionID = ?";
@@ -81,9 +89,6 @@ public class Meeting extends AppCompatActivity {
                 }
             }
 
-            CustomAdapter customAdapter = new CustomAdapter(this, list_string);
-            listview.setAdapter(customAdapter);
-
             try {
                 if (con != null)
                     con.close();
@@ -96,6 +101,9 @@ public class Meeting extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(this, "Fail to connect to the database. Try again", Toast.LENGTH_SHORT).show();
         }
+
+        CustomAdapter customAdapter = new CustomAdapter(this, list_string);
+        listview.setAdapter(customAdapter);
 
     }
 
