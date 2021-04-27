@@ -165,7 +165,6 @@ public class Schedule extends AppCompatActivity implements AdapterView.OnItemSel
         locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         location.setAdapter(locationAdapter);
 
-        listview2 = (ListView)findViewById(R.id.list2);
 
     }
 
@@ -327,12 +326,15 @@ public class Schedule extends AppCompatActivity implements AdapterView.OnItemSel
                 String[] detail_info = meetingInfo.split(" ");
                 String Section = detail_info[5];
 
-                PreparedStatement stmt = null;
+                PreparedStatement stmt;
                 try (Connection con = DriverManager.getConnection(URL, username, password)) {
                     stmt = con.prepareStatement("INSERT into Assignment value(?,?);");
                     stmt.setString(1, userID);
                     stmt.setString(2, Section);
                     stmt.executeUpdate();
+                   String registered = "Successfully registered for " + detail_info[0] + " section on "
+                         + detail_info[1];
+                    Toast.makeText(this, registered, Toast.LENGTH_LONG).show();
 
                     try {
                         if (con != null)
