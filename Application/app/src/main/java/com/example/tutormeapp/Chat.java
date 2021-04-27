@@ -53,21 +53,42 @@ public class Chat extends Activity implements OnClickListener, OnItemSelectedLis
                 startActivity(intent2);
 
             case R.id.contact_counselor:
-                Uri uri3 = Uri.parse("smsto:5684520187");
+                selection = (TextView) findViewById(R.id.selection);
+
+                Spinner spin = (Spinner) findViewById(R.id.find_counselor);
+                spin.setOnItemSelectedListener(this);   //set listener
+
+                //Create an ArrayAdapter and a default spinner layout
+                ArrayAdapter<String> aa = new ArrayAdapter<String>(
+                        this,
+                        android.R.layout.simple_spinner_item,
+                        counselors);
+
+                //Specify the layout to use when the list of choices appears
+                aa.setDropDownViewResource(
+                        android.R.layout.simple_spinner_dropdown_item);
+                spin.setAdapter(aa);  //connect ArrayAdapter to <Spinner>
+        }
+                Uri uri3 = Uri.parse(String.valueOf(selection));
                 Intent intent3 = new Intent(Intent.ACTION_SENDTO, uri3);
                 intent3.putExtra("sms_body", "Hey TutorMe Tutor, I need some help!");
                 startActivity(intent3);
+
+
+
+
         }
+    //listener methods for callbacks
+    public void onItemSelected(AdapterView<?> parent, View v, int position,
+                               long id) {
+        selection.setText(counselors[position]);
     }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
+        selection.setText("");
     }
+
 }
+
+
+
 
