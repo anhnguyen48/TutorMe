@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Spinner;
 import android.content.Intent;
 import android.net.Uri;
+import android.webkit.WebView;
 
 public class Chat extends Activity implements OnClickListener, OnItemSelectedListener {
     private final String[] counselors = {"Jane George", "Adam Ventura", "Bill Tao", "Liam Miller", "Fiona Monroe", "Ivor Manson"};
@@ -24,6 +25,12 @@ public class Chat extends Activity implements OnClickListener, OnItemSelectedLis
         setContentView(R.layout.chat);
 
         // Set up click listeners for all the buttons
+        Button webButton = (Button)findViewById(R.id.web_help);
+        webButton.setOnClickListener(this);
+
+        Button mapButotn = (Button)findViewById(R.id.bentley_university);
+        webButton.setOnClickListener(this);
+
         Button continueButton = (Button)findViewById(R.id.g_inquiries);
         continueButton.setOnClickListener(this);
 
@@ -38,14 +45,24 @@ public class Chat extends Activity implements OnClickListener, OnItemSelectedLis
     //avoids runtime check for permission to CALL_PHONE
     public void onClick(View v) {
         switch (v.getId()) {
-
+            case R.id.web_help:
+                Intent i1 = new Intent(this, WebLookup.class);
+                startActivity(i1);
+            case R.id.bentley_university:
+                Uri uri1 = Uri.parse("geo:0,0?q=175+forest+street+waltham+ma");
+                Intent i2 = new Intent(Intent.ACTION_VIEW, uri1);
+                /*Checks if GoogleMaps project is on the platform
+                  to avoid app crashing.*/
+                if (i2.resolveActivity(getPackageManager()) != null) {
+                    startActivity(i2);
+                }
+                break;
             case R.id.g_inquiries:
                 Uri uri = Uri.parse("smsto:5872365982");
                 Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
                 intent.putExtra("sms_body", "Hey TutorMe, I need some help!");
                 startActivity(intent);
                 break;
-
             case R.id.registrar:
                 Uri uri2 = Uri.parse("smsto:5684520187");
                 Intent intent2 = new Intent(Intent.ACTION_SENDTO, uri2);

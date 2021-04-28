@@ -4,8 +4,11 @@
     <string name="schedule">Schedule</string>
     <string name="meeting">Meeting</string>
     <string name="email">Email</string>
-    <string name="chat_with_tutorme">Chat With TutorMe</string>
+    <string name="chat_with_tutorme">Get Help or Chat With TutorMe</string>
     <string name="general_inquiries">General Inquiries</string>
     <string name="registrar_s_office">Registrar\'s Office</string>
     <string name="contact_selected_counselor">contact selected counselor</string>
+    <string name="access_khan_academy">Access Khan Academy</string>
+    <string name="go">Go!</string>
+    <string name="local_tutoring_centers">Local Tutoring Centers</string>
 </resources>

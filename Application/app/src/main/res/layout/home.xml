@@ -34,12 +34,18 @@
         android:layout_height="103dp"
         android:layout_gravity="center"
         android:text="@string/email" />
+    <Button
+        android:id="@+id/localTutoringCenters"
+        android:layout_width="244dp"
+        android:layout_height="103dp"
+        android:layout_gravity="center"
+        android:text="@string/local_tutoring_centers" />
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_width="244dp"
+        android:layout_height="103dp"
+        android:layout_gravity="center"
         android:text="Login" />
 
 </LinearLayout>
