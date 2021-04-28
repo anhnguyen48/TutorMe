@@ -29,47 +29,54 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Schedule extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, AdapterView.OnItemClickListener {
-
+    //URL, username and password to connect to external database
     public String URL = "jdbc:mysql://frodo.bentley.edu:3306/tutorme";
     public String username = "harry";
     public String password = "harry";
 
+    //month options
     private final String[] months = { "(Month)", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
-
+    //day options
     private final String[] days = { "(Day)", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
     "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
-
+    //year options
     private final String[] years = { "(Year)", "2021", "2022", "2023", "2024", "2025"};
-
+    //tutoring method options
     private final String[] methods = {"(Method)", "Online", "Offline"};
-
+    //location options
     private final String[] locations = {"(Location)", "Not Applicable", "AL", "AK", "AS", "AZ", "AR", "CA", "CO",
     "CT", "DE", "DC", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA",
     "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR",
     "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "VI", "WA", "WV", "WI", "WY"};
-
+    //available courses (in database)
     private ArrayList<String> courses = new ArrayList<String>();
-
+    //list of available tutoring sessions
     private ArrayList<String> schedule_list = new ArrayList<>();
 
+    //app user's query
     private String monthString;
     private String dayString;
     private String yearString;
     private String courseString;
     private String methodString;
     private String locationString;
-    private String userID;
-    private String class_name;
-    private ListView listview2;
-    private boolean check = true;
-    private boolean check2 = true;
 
+    //data retrieved from Login activity
+    private String userID; //userID of app user
+    private String class_name; //name of each available class (to add to courses ArrayList)
+
+    private ListView listview2; //present list of available tutoring sessions
+    private boolean check = true; //check if user forgot to choose a specific option (e.g., forgot to choose a location)
+    private boolean check2 = true; //check for any user error when they formulate the query
+
+    //information from the database
     private String classID;
     private String method;
     private String state;
-    private String date;
 
-    private Integer place;
+    private String date; //user's chosen date
+
+    private Integer place; //location of specific tutoring session in schedule_list ArrayList
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,15 +104,15 @@ public class Schedule extends AppCompatActivity implements AdapterView.OnItemSel
         Spinner course = (Spinner) findViewById(R.id.course);
         course.setOnItemSelectedListener(this);
 
-        Spinner method = (Spinner) findViewById(R.id.method); //Online or offline
+        Spinner method = (Spinner) findViewById(R.id.method);
         method.setOnItemSelectedListener(this);
 
         Spinner location = (Spinner) findViewById(R.id.location);
         location.setOnItemSelectedListener(this);
 
-        courses.add("(Course)");
+        courses.add("(Course)"); //add the not-option option into courses ArrayList
 
-        try {
+        try { //load driver into VM memory
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -113,13 +120,14 @@ public class Schedule extends AppCompatActivity implements AdapterView.OnItemSel
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        Statement stmt = null;
+        Statement stmt;
 
+        //create connection using try with resources
         try (Connection con = DriverManager.getConnection(URL, username, password)) {
             stmt = con.createStatement();
-            ResultSet result = stmt.executeQuery("SELECT ClassName, ClassDescription FROM Class;");
+            ResultSet result = stmt.executeQuery("SELECT ClassName, ClassDescription FROM Class;"); //find all available courses
 
-            //for each record in CLass table add them to course2 ArrayList
+            //for each record in CLass table, add them to courses ArrayList
             while (result.next()) {
                 class_name = result.getString("ClassName") + ": " + result.getString("ClassDescription");
                 courses.add(class_name);
@@ -164,34 +172,32 @@ public class Schedule extends AppCompatActivity implements AdapterView.OnItemSel
 
         locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         location.setAdapter(locationAdapter);
-
-
     }
 
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
         switch (parent.getId()) {
             case R.id.month:
-                monthString = months[position];
+                monthString = months[position]; //get user's chosen month
                 break;
 
             case R.id.day:
-                dayString = days[position];
+                dayString = days[position]; //get user's chosen day
                 break;
 
             case R.id.year:
-                yearString = years[position];
+                yearString = years[position]; //get user's chosen year
                 break;
 
             case R.id.course:
-                courseString = courses.get(position);
+                courseString = courses.get(position); //get user's chosen course
                 break;
 
             case R.id.method:
-                methodString = methods[position];
+                methodString = methods[position]; //get user's chosen tutoring method
                 break;
 
             case R.id.location:
-                locationString = locations[position];
+                locationString = locations[position]; //get user's chosen location
                 break;
 
         }
@@ -205,6 +211,7 @@ public class Schedule extends AppCompatActivity implements AdapterView.OnItemSel
         switch (v.getId()) {
             case R.id.findButton:
 
+                //catch all possible error when user forgot to choose a specific option
                 if (monthString.equals("(Month)")) {
                     Toast.makeText(this, "Option 'month' is not chosen", Toast.LENGTH_SHORT).show();
                     check = false;
@@ -230,11 +237,14 @@ public class Schedule extends AppCompatActivity implements AdapterView.OnItemSel
                     check = false;
                 }
 
+                //if no error is presented, open database to find available section
                 if (check) {
+                    //create connection using try with resources
                     try (Connection con = DriverManager.getConnection(URL, username, password)) {
-                        date = yearString + "-" + monthString + "-" + dayString;
-                        courseString = courseString.substring(0,5);
+                        date = yearString + "-" + monthString + "-" + dayString; //create date string that is compatible with the database
+                        courseString = courseString.substring(0,5); //grab the course name
 
+                        //check if the specific course have the prefer tutoring method that user chooses
                         String temp_sql = "SELECT ClassID, IsOnline, State FROM Class WHERE ClassName = ? LIMIT 1";
                         PreparedStatement stmt2 = con.prepareStatement(temp_sql);
                         stmt2.setString(1, courseString);
@@ -272,6 +282,7 @@ public class Schedule extends AppCompatActivity implements AdapterView.OnItemSel
                             }
                         }
 
+                        //find avaialble tutoring sessions after all error are caught
                         if (check2) {
                             String sql = "SELECT SectionDate, SectionTime, Length, Capacity, SectionID " +
                                     "FROM Section WHERE ClassID = ? AND SectionDate = ?";
@@ -292,6 +303,7 @@ public class Schedule extends AppCompatActivity implements AdapterView.OnItemSel
                                 Toast.makeText(this, "There is no section available", Toast.LENGTH_SHORT).show();
                             }
                             else {
+                                //display all available tutoring sessions
                                 CustomAdapter customAdapter = new CustomAdapter(this, schedule_list);
                                 listview2.setAdapter(customAdapter);
                             }
@@ -322,16 +334,21 @@ public class Schedule extends AppCompatActivity implements AdapterView.OnItemSel
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.SignUp:
+                //get the chosen section in listview
+                //find sectionID of the chosen section
                 String meetingInfo = schedule_list.get(place);
                 String[] detail_info = meetingInfo.split(" ");
                 String Section = detail_info[5];
 
+                //add the chosen section with userID into Assignment table for later use (in Meeting Activity)
                 PreparedStatement stmt;
                 try (Connection con = DriverManager.getConnection(URL, username, password)) {
                     stmt = con.prepareStatement("INSERT into Assignment value(?,?);");
                     stmt.setString(1, userID);
                     stmt.setString(2, Section);
                     stmt.executeUpdate();
+
+                    //Make a Toast confirming that user has succesfully registered for the tutoring session
                    String registered = "Successfully registered for " + detail_info[0] + " section on "
                          + detail_info[1];
                     Toast.makeText(this, registered, Toast.LENGTH_LONG).show();

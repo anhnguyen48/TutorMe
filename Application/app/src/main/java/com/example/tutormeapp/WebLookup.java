@@ -12,9 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class WebLookup extends Activity {
-    private EditText urlText;
-    private Button goButton;
-    private WebView webView;
+    private EditText urlText; //URL for WebView
+    private Button goButton; //start WebView when pressed
+    private WebView webView; //show the predetermined website
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

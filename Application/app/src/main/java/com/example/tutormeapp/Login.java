@@ -17,21 +17,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 // test
 public class Login extends AppCompatActivity implements View.OnClickListener{
+    //URL, username and password to connect to external database
     public String URL = "jdbc:mysql://frodo.bentley.edu:3306/tutorme";
     public String username = "harry";
     public String password = "harry";
-    private EditText user;
-    private EditText pass;
-    private String userID;
+
+    //information from the database
+    private EditText user; //username of app user
+    private EditText pass; //password of app user
+    private String userID; //userID of app user
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        //this button checks username and password against the database
+        //if correct, leads the user to home screen (MainActivity)
         Button loginButton = (Button) findViewById(R.id.loginScreenButton);
         loginButton.setOnClickListener(this);
 
-        try {
+        try { //load driver into VM memory
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -42,16 +48,20 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     public void onClick (View v) {
         switch (v.getId()) {
             case R.id.loginScreenButton:
+                //create connection using try with resources
                 try (Connection con = DriverManager.getConnection(URL, username, password)) {
-                    EditText user = findViewById(R.id.username);
-                    EditText pass = findViewById(R.id.password);
-                    String sql = "SELECT pass FROM Person WHERE UserName = ? LIMIT 1";
+                    user = findViewById(R.id.username);
+                    pass = findViewById(R.id.password);
+                    String sql = "SELECT pass FROM Person WHERE UserName = ? LIMIT 1"; //find password given username
                     PreparedStatement stmt = con.prepareStatement(sql);
                     stmt.setString(1, String.valueOf(user.getText()));
                     ResultSet result = stmt.executeQuery();
                     result.next();
+
+                    //compare password from database against password provided by user
+                    //if correct, leads user to home screen (MainActivity)
                     if(result.getString(1).equals(String.valueOf(pass.getText()))){
-                        String sql2 = "SELECT PersonID from Person WHERE UserName = ? LIMIT 1";
+                        String sql2 = "SELECT PersonID from Person WHERE UserName = ? LIMIT 1"; //grab userID from database for later use
                         PreparedStatement stmt2 = con.prepareStatement(sql2);
                         stmt2.setString(1, String.valueOf(user.getText()));
                         ResultSet result2 = stmt2.executeQuery();

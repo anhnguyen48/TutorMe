@@ -27,13 +27,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    //URL, username and password to connect to external database
     public String URL = "jdbc:mysql://frodo.bentley.edu:3306/tutorme";
     public String username = "harry";
     public String password = "harry";
-    private String userID;
-    private String firstName;
-    private String lastName;
 
+    //data retrieved from Login activity
+    private String userID; //userID of app user
+
+    //information from the database
+    private String firstName; //app user's first name
+    private String lastName; //app user's last name
+
+    //
     private NotificationManager mNotificationManager;
     private NotificationCompat.Builder notifyDetails = null;
     private int SIMPLE_NOTFICATION_ID = 1;
@@ -47,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         userID = getIntent().getStringExtra("userID"); //grab userID from LoginActivity
 
-        try {
+        try { //load driver into VM memory
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -55,10 +61,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        //create connection using try with resources
         try (Connection con = DriverManager.getConnection(URL, username, password)) {
-            EditText user = findViewById(R.id.username);
-            EditText pass = findViewById(R.id.password);
-            String sql = "SELECT FirstName, LastName FROM Person WHERE PersonID = ? LIMIT 1";
+            String sql = "SELECT FirstName, LastName FROM Person WHERE PersonID = ? LIMIT 1"; //grab user's first and last name from database
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, userID);
             ResultSet result = stmt.executeQuery();
@@ -79,13 +84,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "Fail to connect to the database. Try again", Toast.LENGTH_SHORT).show();
         }
 
-        contentText = contentText + firstName + " " + lastName;
+        contentText = contentText + firstName + " " + lastName; //generate the greeting notification
 
         mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("default",
                     "Channel foobar",
-                    NotificationManager.IMPORTANCE_HIGH);
+                    NotificationManager.IMPORTANCE_HIGH); //heads-up notification
             channel.setDescription("Channel description");
             channel.setLightColor(Color.GREEN);
             mNotificationManager.createNotificationChannel(channel);
@@ -96,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setSmallIcon(R.drawable.logo)
                 .setContentTitle(contentTitle)
                 .setContentText(contentText)
-                .setTimeoutAfter(2000)
+                .setTimeoutAfter(2000) //cancel Notification after 2 seconds
                 .setAutoCancel(true);     //cancel Notification after clicking on it
 
         mNotificationManager.notify(SIMPLE_NOTFICATION_ID,

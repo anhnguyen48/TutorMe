@@ -19,10 +19,15 @@ import android.net.Uri;
 import android.webkit.WebView;
 
 public class Chat extends Activity implements OnClickListener, OnItemSelectedListener {
-    private final String[] counselors = {"Jane George", "Adam Ventura", "Bill Tao", "Liam Miller", "Fiona Monroe", "Ivor Manson"};
-    private final String[] numbers = {"smsto:5684237852", "smsto:7951234865", "smsto:7854963215", "smsto:2645781569", "smsto:3458961257", "smsto:8585963262"};
-    private TextView selection;
 
+    //names of available counselors
+    private final String[] counselors = {"Jane George", "Adam Ventura", "Bill Tao", "Liam Miller", "Fiona Monroe", "Ivor Manson"};
+
+    //cellphone numbers
+    private final String[] numbers = {"smsto:5684237852", "smsto:7951234865", "smsto:7854963215", "smsto:2645781569", "smsto:3458961257", "smsto:8585963262"};
+    private TextView selection; //user's current selection of counselor
+
+    //used for animation
     private RelativeLayout layout;
     private ImageView image;
 
@@ -80,15 +85,14 @@ public class Chat extends Activity implements OnClickListener, OnItemSelectedLis
         switch (v.getId()) {
             case R.id.web_help:
                 Intent i1 = new Intent(this, WebLookup.class);
-                startActivity(i1);
+                startActivity(i1); //Open WebLookup Activity
                 break;
 
             case R.id.bentley_university:
-                Uri uri1 = Uri.parse("geo:42.3854, -71.2219?z=16");
+                Uri uri1 = Uri.parse("geo:42.3854, -71.2219?z=16"); //coordinate of Bentley University
                 Intent i2 = new Intent(Intent.ACTION_VIEW, uri1);
                 i2.setPackage("com.google.android.apps.maps");
                 startActivity(i2);
-
                 break;
 
             case R.id.g_inquiries:
@@ -123,13 +127,7 @@ public class Chat extends Activity implements OnClickListener, OnItemSelectedLis
                 spin.setAdapter(aa);  //connect ArrayAdapter to <Spinner>
                 break;
         }
-               /* Uri uri3 = Uri.parse(String.valueOf(selection));
-                Intent intent3 = new Intent(Intent.ACTION_SENDTO, uri3);
-                intent3.putExtra("sms_body", "Hey TutorMe Tutor, I need some help!");
-                startActivity(intent3); */
-
-
-        }
+    }
     //listener methods for callbacks
     public void onItemSelected(AdapterView<?> parent, View v, int position,
                                long id) {

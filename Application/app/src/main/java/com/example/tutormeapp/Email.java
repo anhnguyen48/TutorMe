@@ -19,6 +19,7 @@ public class Email extends AppCompatActivity implements View.OnClickListener{
     public void onClick (View v) {
         switch (v.getId()) {
             case R.id.sendButton:
+                //after user sends the email, take user back to Main Activity
                 Intent i1= new Intent(this, MainActivity.class);
                 startActivity(i1);
                 break;

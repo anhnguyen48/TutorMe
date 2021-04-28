@@ -13,20 +13,21 @@ public class CustomAdapter extends ArrayAdapter {
     ArrayList<String> arrayList;
     Context context;
 
-    public CustomAdapter(Context context, ArrayList<String> arrayList) {
+    public CustomAdapter(Context context, ArrayList<String> arrayList) { //set up CustomAdapter that takes in an ArrayList
         super(context, 0, arrayList);
         this.arrayList = arrayList;
         this.context = context;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        String meetingInfo = arrayList.get(position);
-        String[] detail_info = meetingInfo.split(" ");
+        String meetingInfo = arrayList.get(position); //grab each tutoring session in ArrayList
+        String[] detail_info = meetingInfo.split(" "); //split the string wherever there is a space
 
         if (convertView == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(context);
             convertView = layoutInflater.inflate(R.layout.meeting_item, null);
 
+            //set up how each session should be displayed
             String tempString = "Course Number: " + detail_info[0] +
                     "\nDate: " + detail_info[1] +
                     "\nTime: " + detail_info[2] +
