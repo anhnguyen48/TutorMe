@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text" />
+                android:inputType="textEmailAddress" />
         </TableRow>
 
         <TableRow
@@ -40,7 +40,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView45"
+                android:id="@+id/textView34"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Subject"
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textWebPassword" />
+                android:inputType="text" />
         </TableRow>
 
         <TableRow
@@ -60,7 +60,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView45"
+                android:id="@+id/textview6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Body"
