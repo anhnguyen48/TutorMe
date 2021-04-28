@@ -8,13 +8,16 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.sql.Connection;
@@ -99,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mNotificationManager.notify(SIMPLE_NOTFICATION_ID,
                 notifyDetails.build());
 
+
         Button chatButton = (Button) findViewById(R.id.chatButton);
         chatButton.setOnClickListener(this);
 
@@ -114,8 +118,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button webButton = (Button) findViewById(R.id.localTutoringCenters);
         webButton.setOnClickListener(this);
 
-
     }
+
 
     public void onClick (View v) {
         switch (v.getId()) {
