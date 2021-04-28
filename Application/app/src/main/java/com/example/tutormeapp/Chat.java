@@ -84,13 +84,11 @@ public class Chat extends Activity implements OnClickListener, OnItemSelectedLis
                 break;
 
             case R.id.bentley_university:
-                Uri uri1 = Uri.parse("geo:0,0?q=175+forest+street+waltham+ma");
+                Uri uri1 = Uri.parse("geo:42.3854, -71.2219?z=16");
                 Intent i2 = new Intent(Intent.ACTION_VIEW, uri1);
-                /*Checks if GoogleMaps project is on the platform
-                  to avoid app crashing.*/
-                if (i2.resolveActivity(getPackageManager()) != null) {
-                    startActivity(i2);
-                }
+                i2.setPackage("com.google.android.apps.maps");
+                startActivity(i2);
+
                 break;
 
             case R.id.g_inquiries:
