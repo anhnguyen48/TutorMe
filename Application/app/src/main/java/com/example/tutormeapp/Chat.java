@@ -83,7 +83,7 @@ public class Chat extends Activity implements OnClickListener, OnItemSelectedLis
     //avoids runtime check for permission to CALL_PHONE
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.web_help:
+            case R.id.web_help: //button opens khanacademy
                 Intent i1 = new Intent(this, WebLookup.class);
                 startActivity(i1); //Open WebLookup Activity
                 break;
@@ -95,21 +95,21 @@ public class Chat extends Activity implements OnClickListener, OnItemSelectedLis
                 startActivity(i2);
                 break;
 
-            case R.id.g_inquiries:
+            case R.id.g_inquiries: //button sets up a text message for general questions to tutorme admin
                 Uri uri = Uri.parse("smsto:5872365982");
                 Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
                 intent.putExtra("sms_body", "Hey TutorMe, I need some help!");
                 startActivity(intent);
                 break;
 
-            case R.id.registrar:
+            case R.id.registrar: //button sets up a text message for course specific questions to tutorme registrar
                 Uri uri2 = Uri.parse("smsto:5684520187");
                 Intent intent2 = new Intent(Intent.ACTION_SENDTO, uri2);
                 intent2.putExtra("sms_body", "Hey TutorMe Registrar, I need some help!");
                 startActivity(intent2);
                 break;
 
-            case R.id.contact_counselor:
+            case R.id.contact_counselor: //button sets up a text message to be able to text a selected counselor
                 selection = (TextView) findViewById(R.id.selection);
 
                 Spinner spin = (Spinner) findViewById(R.id.find_counselor);
