@@ -314,14 +314,14 @@ public class Schedule extends AppCompatActivity implements AdapterView.OnItemSel
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.menuschedule, menu);
         return true;
     }
 
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.SignUp:
+            case R.id.signup:
                 String meetingInfo = schedule_list.get(place);
                 String[] detail_info = meetingInfo.split(" ");
                 String Section = detail_info[5];

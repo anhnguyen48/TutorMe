@@ -2,8 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/SignUp"
-        android:title="SIGN UP"
+        android:id="@+id/chat"
+        android:title="CHAT"
         app:showAsAction="always" />
-
+    <item
+        android:id="@+id/schedule"
+        android:title="SCHEDULE"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/meeting"
+        android:title="MEETING"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/email"
+        android:title="EMAIL"
+        app:showAsAction="always" />
 </menu>

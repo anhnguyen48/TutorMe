@@ -1,5 +1,6 @@
 package com.example.tutormeapp;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
@@ -11,6 +12,8 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -46,7 +49,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.home);
 
         userID = getIntent().getStringExtra("userID"); //grab userID from LoginActivity
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("TutorMe");
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(true);
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -152,6 +158,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 i4.putExtra("userID", userID); //Bring userID to WebLookupActivity for later use
                 startActivity(i4);
                 break;
+        }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.chat:
+                Intent i0 = new Intent(this, Chat.class);
+                i0.putExtra("userID", userID); //Bring userID to ChatActivity for later use
+                startActivity(i0); //Open Chat Activity
+                return true;
+            case R.id.schedule:
+                Intent i1 = new Intent(this, Schedule.class);
+                i1.putExtra("userID", userID); //Bring userID to ScheduleActivity for later use
+                startActivity(i1); //Open Schedule Activity
+                return true;
+            case R.id.meeting:
+                Intent i2 = new Intent(this, Meeting.class);
+                i2.putExtra("userID", userID); //Bring userID to MeetingActivity for later use
+                startActivity(i2);
+                return true;
+            case R.id.email:
+                Intent i3 = new Intent(this, Email.class);
+                i3.putExtra("userID", userID); //Bring userID to EmailActivity for later use
+                startActivity(i3);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
