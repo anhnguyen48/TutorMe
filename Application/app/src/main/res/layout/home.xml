@@ -41,11 +41,5 @@
         android:layout_gravity="center"
         android:text="@string/local_tutoring_centers" />
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="244dp"
-        android:layout_height="103dp"
-        android:layout_gravity="center"
-        android:text="Login" />
 
 </LinearLayout>

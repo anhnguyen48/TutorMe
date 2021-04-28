@@ -26,20 +26,13 @@ public class WebLookup extends Activity {
         goButton = (Button) findViewById(R.id.go_button);
         webView = (WebView) findViewById(R.id.web_view);
         webView.getSettings().setJavaScriptEnabled(true);
+        urlText.setText("https://www.khanacademy.org/");
 
-        //intercept URL loading and load in widget
-        webView.setWebViewClient(new WebViewClient(){
-            @SuppressWarnings("deprecation")
-            public boolean shouldOverrideUrlLoading(WebView view, String url){
-                view.loadUrl(url);
-                return true;
-            }
-        });
 
-        // Set button to open browser
         goButton.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
-                webView.loadUrl("https://www.khanacademy.org/");
+                webView.getSettings().setJavaScriptEnabled(true);
+                webView.loadUrl(urlText.getText().toString());
             }
         });
 

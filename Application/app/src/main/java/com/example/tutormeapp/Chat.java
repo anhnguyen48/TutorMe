@@ -28,8 +28,8 @@ public class Chat extends Activity implements OnClickListener, OnItemSelectedLis
         Button webButton = (Button)findViewById(R.id.web_help);
         webButton.setOnClickListener(this);
 
-        Button mapButotn = (Button)findViewById(R.id.bentley_university);
-        webButton.setOnClickListener(this);
+        Button mapButton = (Button)findViewById(R.id.bentley_university);
+        mapButton.setOnClickListener(this);
 
         Button continueButton = (Button)findViewById(R.id.g_inquiries);
         continueButton.setOnClickListener(this);
@@ -48,6 +48,8 @@ public class Chat extends Activity implements OnClickListener, OnItemSelectedLis
             case R.id.web_help:
                 Intent i1 = new Intent(this, WebLookup.class);
                 startActivity(i1);
+                break;
+
             case R.id.bentley_university:
                 Uri uri1 = Uri.parse("geo:0,0?q=175+forest+street+waltham+ma");
                 Intent i2 = new Intent(Intent.ACTION_VIEW, uri1);
@@ -57,12 +59,14 @@ public class Chat extends Activity implements OnClickListener, OnItemSelectedLis
                     startActivity(i2);
                 }
                 break;
+
             case R.id.g_inquiries:
                 Uri uri = Uri.parse("smsto:5872365982");
                 Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
                 intent.putExtra("sms_body", "Hey TutorMe, I need some help!");
                 startActivity(intent);
                 break;
+
             case R.id.registrar:
                 Uri uri2 = Uri.parse("smsto:5684520187");
                 Intent intent2 = new Intent(Intent.ACTION_SENDTO, uri2);

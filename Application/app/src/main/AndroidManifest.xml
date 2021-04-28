@@ -21,8 +21,10 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".Schedule"/>
         <activity android:name=".Meeting"/>
+        <activity android:name=".WebLookup"/>
     </application>
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
 </manifest>

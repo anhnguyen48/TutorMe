@@ -37,7 +37,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             e.printStackTrace();
         }
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-
         StrictMode.setThreadPolicy(policy);
     }
     public void onClick (View v) {
@@ -58,6 +57,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         ResultSet result2 = stmt2.executeQuery();
                         while (result2.next()) {
                             userID = result2.getString("PersonID");
+
                         }
                         Intent i1 = new Intent(this, MainActivity.class);
                         i1.putExtra("userID", userID); //Bring userID to MainActivity for later use
