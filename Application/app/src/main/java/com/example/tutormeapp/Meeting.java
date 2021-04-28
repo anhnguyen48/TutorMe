@@ -16,16 +16,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Meeting extends AppCompatActivity {
-
+    //URL, username and password to connect to external database
     public String URL = "jdbc:mysql://frodo.bentley.edu:3306/tutorme";
     public String username = "harry";
     public String password = "harry";
 
-    private ListView listview;
-    private ArrayList<String> list_string = new ArrayList<String>();
+    private ListView listview; //present list of tutoring sessions that user signed up for
+    private ArrayList<String> list_string = new ArrayList<String>(); //list of tutoring sessions that user signed up for
 
-    private String userID;
+    //data retrieved from Login activity
+    private String userID; //userID of app user
 
+    //information from the database
     private String section;
     private String course_id;
     private String course_name;
@@ -38,7 +40,7 @@ public class Meeting extends AppCompatActivity {
 
         listview = (ListView)findViewById(R.id.list);
 
-        try {
+        try { //load driver into VM memory
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -46,8 +48,9 @@ public class Meeting extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        //create connection using try with resources
         try (Connection con = DriverManager.getConnection(URL, username, password)) {
-            String sql = "SELECT SectionID FROM Assignment WHERE PersonID = ?;";
+            String sql = "SELECT SectionID FROM Assignment WHERE PersonID = ?;"; //grab all tutoring sessions that user signed up for
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, userID);
             ResultSet result = stmt.executeQuery();
@@ -76,7 +79,7 @@ public class Meeting extends AppCompatActivity {
                 }
 
                 String sql4 = "SELECT SectionDate, SectionTime, Length, Capacity " +
-                        "FROM Section WHERE SectionID = ?";
+                        "FROM Section WHERE SectionID = ?"; //grab all information regarding the specific tutoring session
                 PreparedStatement stmt4 = con.prepareStatement(sql4);
                 stmt4.setString(1, section);
                 ResultSet result4 = stmt4.executeQuery();
@@ -102,6 +105,7 @@ public class Meeting extends AppCompatActivity {
             Toast.makeText(this, "Fail to connect to the database. Try again", Toast.LENGTH_SHORT).show();
         }
 
+        //display all tutoring session that user signed up for
         CustomAdapter customAdapter = new CustomAdapter(this, list_string);
         listview.setAdapter(customAdapter);
 
