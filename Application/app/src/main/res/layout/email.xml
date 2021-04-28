@@ -28,7 +28,7 @@
                 android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -48,7 +48,7 @@
                 android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/subject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -69,7 +69,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
