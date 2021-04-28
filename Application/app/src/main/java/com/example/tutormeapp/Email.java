@@ -31,7 +31,7 @@ public class Email extends AppCompatActivity implements View.OnClickListener{
         sendButton.setOnClickListener(this);
         Button ttsButton = (Button) findViewById(R.id.ttsButton);
         ttsButton.setOnClickListener(this);
-        speaker = new TextToSpeech(getApplicationContext(), i -> speaker.setLanguage(Locale.US));
+        speaker = new TextToSpeech(getApplicationContext(), i -> speaker.setLanguage(Locale.US)); // set up speaker with US english language
     }
     public void onClick (View v) {
         switch (v.getId()) {
@@ -39,16 +39,16 @@ public class Email extends AppCompatActivity implements View.OnClickListener{
                 address = findViewById(R.id.address);
                 subject = findViewById(R.id.subject);
                 body = findViewById(R.id.body);
-                Intent i1 = new Intent(Intent.ACTION_SENDTO);
-                i1.setData(Uri.parse("mailto:"));
-                i1.putExtra(i1.EXTRA_EMAIL, new String[]{address.getText().toString()});
-                i1.putExtra(i1.EXTRA_SUBJECT, subject.getText().toString());
-                i1.putExtra(i1.EXTRA_TEXT, body.getText().toString());
+                Intent i1 = new Intent(Intent.ACTION_SENDTO); // set up intent for emailing without attachments
+                i1.setData(Uri.parse("mailto:")); // set up uri to let user pick what email app they want to use
+                i1.putExtra(i1.EXTRA_EMAIL, new String[]{address.getText().toString()}); // add email address
+                i1.putExtra(i1.EXTRA_SUBJECT, subject.getText().toString()); // add email subject
+                i1.putExtra(i1.EXTRA_TEXT, body.getText().toString()); // add email body
                 startActivity(i1);
                 break;
             case R.id.ttsButton:
                 EditText bodyTwo = findViewById(R.id.body);
-                speaker.speak(bodyTwo.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+                speaker.speak(bodyTwo.getText().toString(), TextToSpeech.QUEUE_FLUSH, null); // speak out body text
                 break;
         }
     }
